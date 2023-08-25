@@ -1,7 +1,7 @@
 import { FaExclamationTriangle, FaSadTear } from "react-icons/fa";
 import Link from "next/link";
-import Layout from "../components/Layout";
-import styles from "../styles/404.module.css";
+import Layout from "@/components/Layout";
+import styles from "@/styles/404.module.css";
 
 export default function NotFoundPage() {
   return (
@@ -16,7 +16,9 @@ export default function NotFoundPage() {
           {"\t"}
           Sorry, Page not found!
         </h4>
-        <Link href={"/"}>Go back to Home</Link>
+        <Link href={"/"} className={styles.content}>
+          Go back to Home
+        </Link>
       </div>
     </Layout>
   );
