@@ -1,0 +1,46 @@
+.event {
+  position: relative;
+  padding-top: 40px;
+}
+
+.event h3 {
+  font-size: 25px;
+}
+
+.event p {
+  margin: 10px 0;
+}
+
+.image {
+  display: block;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.myimg {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.4s ease-in-out;
+}
+
+.myimg:hover {
+  scale: 1.2;
+}
+
+.controls {
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+
+.delete {
+  margin-left: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+.back {
+  display: block;
+  margin-top: 40px;
+}

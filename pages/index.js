@@ -24,10 +24,9 @@ export default function HomePage({ events }) {
 
 export async function getStaticProps() {
   //if you console.log here will displayed in terminal since this is a serverless backend
-  const res = await fetch(`${API_URL}/api/events`);
+  const res = await fetch(`${API_URL}/api/events?populate=*&sort=date:ASC&_3`);
   var events = await res.json();
-  events = events.events.slice(0, 3);
-
+  events = events.data;
   return {
     props: { events },
     revalidate: 1

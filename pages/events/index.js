@@ -1,6 +1,7 @@
 import EventItem from "@/components/EventItem";
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
+import Link from "next/link";
 
 export default function EventsPage({ events }) {
   return (
@@ -17,11 +18,11 @@ export default function EventsPage({ events }) {
 
 export async function getStaticProps() {
   //if you console.log here will displayed in terminal since this is a serverless backend
-  const res = await fetch(`${API_URL}/api/events`);
-  const events = await res.json();
-
+  const res = await fetch(`${API_URL}/api/events?populate=*&sort=date:ASC`);
+  var events = await res.json();
+  events = events.data;
   return {
-    props: events,
+    props: { events },
     revalidate: 1
   };
 }
