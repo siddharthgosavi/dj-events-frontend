@@ -27,7 +27,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
   // const total = await totalRes.json();
 
   // Fetch events
-  const eventRes = await fetch(`${API_URL}/events?_sort=date:ASC&_limit=2`);
+  const eventRes = await fetch(`${API_URL}/events?_sort=date:ASC`);
   const events = await eventRes.json();
   return {
     props: { events }
