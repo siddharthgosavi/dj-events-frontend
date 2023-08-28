@@ -5,6 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import styles from "@/styles/Login.module.css";
 import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "context/AuthContext";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -12,13 +13,15 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const { register, error } = useContext(AuthContext);
+
   function handleSubmit(e) {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
       toast.error("Passwords do not match!, Try again");
     }
-    console.log({ username, email, password });
+    register({ user: { username, email, password } });
   }
 
   return (

@@ -81,7 +81,7 @@ export default function EditEventPage({ event }) {
       <ToastContainer />
       <h2>Event Image</h2>
       {imagePreview ? (
-        <Image src={imagePreview} height={100} width={170} />
+        <Image alt="image" src={imagePreview} height={100} width={170} />
       ) : (
         <div>
           <p>No Image uploaded</p>
@@ -95,7 +95,7 @@ export default function EditEventPage({ event }) {
         <br />
       </div>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={event.id} imageUploaded={imageUploaded} />
+        <Image alt="image" Upload evtId={event.id} imageUploaded={imageUploaded} />
       </Modal>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
