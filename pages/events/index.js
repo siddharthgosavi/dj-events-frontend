@@ -14,7 +14,7 @@ export default function EventsPage({ events, page, total }) {
         <EventItem key={evt.id} evt={evt} />
       ))}
 
-      <Pagination page={page} total={total} />
+      <Pagination key={page} page={page} total={total} />
     </Layout>
   );
 }

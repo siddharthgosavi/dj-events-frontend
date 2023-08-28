@@ -15,11 +15,18 @@ export default function RegisterPage() {
 
   const { register, error } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  });
+
   function handleSubmit(e) {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
       toast.error("Passwords do not match!, Try again");
+      return;
     }
     register({ user: { username, email, password } });
   }
