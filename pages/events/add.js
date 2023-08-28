@@ -7,6 +7,7 @@ import Link from "next/link";
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.css";
+import { parseCookies } from "@/helpers/index";
 
 export default function AddEventPage({ token }) {
   const [values, setValues] = useState({
@@ -34,8 +35,8 @@ export default function AddEventPage({ token }) {
     const res = await fetch(`${API_URL}/events`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
-        // Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(values)
     });
@@ -101,12 +102,13 @@ export default function AddEventPage({ token }) {
   );
 }
 
-// export async function getServerSideProps({ req }) {
-//   const { token } = parseCookies(req);
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req);
 
-//   return {
-//     props: {
-//       token
-//     }
-//   };
-// }
+  console.log("token ", token);
+  return {
+    props: {
+      token
+    }
+  };
+}

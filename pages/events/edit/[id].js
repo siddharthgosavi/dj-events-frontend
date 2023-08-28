@@ -12,8 +12,9 @@ import Image from "next/image";
 import { FaImage } from "react-icons/fa";
 import Modal from "@/components/Modal";
 import ImageUpload from "@/components/ImageUpload";
+import { parseCookies } from "helpers";
 
-export default function EditEventPage({ event }) {
+export default function EditEventPage({ event, token }) {
   const [values, setValues] = useState({
     name: event.name,
     performers: event.performers,
@@ -43,8 +44,8 @@ export default function EditEventPage({ event }) {
     const res = await fetch(`${API_URL}/events/${event.id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
-        // Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(values)
     });
@@ -57,6 +58,7 @@ export default function EditEventPage({ event }) {
       toast.error("Something Went Wrong");
     } else {
       const evt = await res.json();
+      toast.success("event Updated");
       router.push(`/events/${evt.slug}`);
     }
   };
@@ -95,7 +97,7 @@ export default function EditEventPage({ event }) {
         <br />
       </div>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <Image alt="image" Upload evtId={event.id} imageUploaded={imageUploaded} />
+        <ImageUpload alt="image" Upload evtId={event.id} token={token} imageUploaded={imageUploaded} />
       </Modal>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
@@ -137,13 +139,14 @@ export default function EditEventPage({ event }) {
 }
 
 export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req);
   const res = await fetch(`${API_URL}/events/${id}`);
   const event = await res.json();
 
-  console.log(req.headers.cookie);
   return {
     props: {
-      event
+      event,
+      token
     }
   };
 }

@@ -74,7 +74,6 @@ export const AuthProvider = ({ children }) => {
     const data = await res.json();
 
     if (res.ok) {
-      console.log("I am coming in if", data.user);
       setUser(data.user);
     } else {
       setUser(null);
